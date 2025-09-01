@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Console\Scheduling\Schedule;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -15,6 +16,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => \App\Http\Middleware\CheckAdmin::class,
         ]);
+    })
+    ->withSchedule(function (Schedule $schedule): void {
+        // Run task cleanup daily at midnight
+        $schedule->job(new \App\Jobs\CleanupOldTasks())->daily();
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

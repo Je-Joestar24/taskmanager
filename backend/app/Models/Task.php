@@ -20,6 +20,7 @@ class Task extends Model
 
     protected $attributes = [
         'priority' => 'medium',
+        'status' => 'pending',
     ];
 
     public function user()
