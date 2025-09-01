@@ -19,7 +19,6 @@ class Task extends Model
     ];
 
     protected $attributes = [
-        'status' => 'pending',
         'priority' => 'medium',
     ];
 

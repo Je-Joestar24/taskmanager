@@ -25,4 +25,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::patch('/{task}/toggle-status', [App\Http\Controllers\User\TasksController::class, 'toggleStatus']);
         Route::post('/reorder', [App\Http\Controllers\User\TasksController::class, 'reorder']);
     });
+
+    // Admin routes (protected by CheckAdmin middleware)
+    Route::middleware('admin')->prefix('admin')->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\Admin\AdminController::class, 'dashboard']);
+        Route::get('/users', [App\Http\Controllers\Admin\AdminController::class, 'users']);
+        Route::get('/tasks', [App\Http\Controllers\Admin\AdminController::class, 'allTasks']);
+        Route::get('/users/{user}/stats', [App\Http\Controllers\Admin\AdminController::class, 'userStats']);
+    });
 });

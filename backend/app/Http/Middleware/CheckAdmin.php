@@ -12,13 +12,18 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // assuming you have a 'role' column on your users table
-        if ($request->user() && $request->user()->role === 'admin') {
-            return $next($request);
+        if (!$request->user()) {
+            return response()->json([
+                'message' => 'Unauthenticated.'
+            ], 401);
         }
 
-        return response()->json([
-            'message' => 'Unauthorized. Admin access only.'
-        ], 403);
+        if ($request->user()->role !== 'admin') {
+            return response()->json([
+                'message' => 'Unauthorized. Admin access only.'
+            ], 403);
+        }
+
+        return $next($request);
     }
 }
