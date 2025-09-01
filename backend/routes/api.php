@@ -13,4 +13,16 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/register', [RegisterUserController::class, 'store']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout']);
+    
+    // Task management routes
+    Route::prefix('tasks')->group(function () {
+        Route::get('/', [App\Http\Controllers\User\TasksController::class, 'index']);
+        Route::post('/', [App\Http\Controllers\User\TasksController::class, 'store']);
+        Route::get('/statistics', [App\Http\Controllers\User\TasksController::class, 'statistics']);
+        Route::get('/{task}', [App\Http\Controllers\User\TasksController::class, 'show']);
+        Route::put('/{task}', [App\Http\Controllers\User\TasksController::class, 'update']);
+        Route::delete('/{task}', [App\Http\Controllers\User\TasksController::class, 'destroy']);
+        Route::patch('/{task}/toggle-status', [App\Http\Controllers\User\TasksController::class, 'toggleStatus']);
+        Route::post('/reorder', [App\Http\Controllers\User\TasksController::class, 'reorder']);
+    });
 });
