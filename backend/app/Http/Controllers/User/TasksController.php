@@ -200,9 +200,6 @@ class TasksController extends Controller
         ]);
     }
 
-    /**
-     * Toggle task status (pending/completed).
-     */
     public function toggleStatus(Request $request, Task $task): JsonResponse
     {
         // Ensure user can only toggle their own tasks
@@ -223,9 +220,6 @@ class TasksController extends Controller
         ]);
     }
 
-    /**
-     * Get task statistics for the authenticated user.
-     */
     public function statistics(Request $request): JsonResponse
     {
         $user = $request->user();
@@ -253,20 +247,11 @@ class TasksController extends Controller
         ]);
     }
 
-    /**
-     * Clear cache for a specific user's tasks.
-     */
     private function clearUserTasksCache(int $userId): void
     {
-        // Clear all cached task data for this user
-        // Note: Laravel doesn't support wildcard cache deletion
-        // We'll clear specific cache keys when needed
         Cache::forget("user_task_stats_{$userId}");
     }
 
-    /**
-     * Reorder tasks after deletion to maintain sequential order.
-     */
     private function reorderTasksAfterDeletion(int $userId): void
     {
         $tasks = Task::where('user_id', $userId)
