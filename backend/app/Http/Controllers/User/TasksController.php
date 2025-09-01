@@ -141,30 +141,6 @@ class TasksController extends Controller
     }
 
     /**
-     * Remove the specified task.
-     */
-    public function destroy(Request $request, Task $task): JsonResponse
-    {
-        // Ensure user can only delete their own tasks
-        if ($task->user_id !== $request->user()->id) {
-            return response()->json(['message' => 'Unauthorized.'], 403);
-        }
-
-        $userId = $task->user_id;
-        $task->delete();
-
-        // Reorder remaining tasks to fill the gap
-        $this->reorderTasksAfterDeletion($userId);
-
-        // Clear cache for this user
-        $this->clearUserTasksCache($userId);
-
-        return response()->json([
-            'message' => 'Task deleted successfully.'
-        ]);
-    }
-
-    /**
      * Reorder tasks for the authenticated user.
      */
     public function reorder(Request $request): JsonResponse
@@ -250,16 +226,5 @@ class TasksController extends Controller
     private function clearUserTasksCache(int $userId): void
     {
         Cache::forget("user_task_stats_{$userId}");
-    }
-
-    private function reorderTasksAfterDeletion(int $userId): void
-    {
-        $tasks = Task::where('user_id', $userId)
-            ->orderBy('order')
-            ->get();
-
-        foreach ($tasks as $index => $task) {
-            $task->update(['order' => $index + 1]);
-        }
     }
 }

@@ -21,7 +21,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/statistics', [App\Http\Controllers\User\TasksController::class, 'statistics']);
         Route::get('/{task}', [App\Http\Controllers\User\TasksController::class, 'show']);
         Route::put('/{task}', [App\Http\Controllers\User\TasksController::class, 'update']);
-        Route::delete('/{task}', [App\Http\Controllers\User\TasksController::class, 'destroy']);
         Route::patch('/{task}/toggle-status', [App\Http\Controllers\User\TasksController::class, 'toggleStatus']);
         Route::post('/reorder', [App\Http\Controllers\User\TasksController::class, 'reorder']);
     });
@@ -32,5 +31,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/users', [App\Http\Controllers\Admin\AdminController::class, 'users']);
         Route::get('/tasks', [App\Http\Controllers\Admin\AdminController::class, 'allTasks']);
         Route::get('/users/{user}/stats', [App\Http\Controllers\Admin\AdminController::class, 'userStats']);
+        Route::delete('/tasks/{task}', [App\Http\Controllers\Admin\TasksController::class, 'destroy']);
     });
 });

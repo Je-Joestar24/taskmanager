@@ -223,7 +223,7 @@ Authorization: Bearer {token}
 }
 ```
 
-#### Delete Task
+#### Delete Task (User)
 ```http
 DELETE /api/tasks/{id}
 Authorization: Bearer {token}
@@ -235,6 +235,26 @@ Authorization: Bearer {token}
   "message": "Task deleted successfully."
 }
 ```
+
+#### Delete Task (Admin)
+```http
+DELETE /api/admin/tasks/{id}
+Authorization: Bearer {token}
+```
+
+**Response (200):**
+```json
+{
+  "message": "Task deleted successfully by admin.",
+  "deleted_task": {
+    "id": 3,
+    "title": "Task Title",
+    "user_id": 7
+  }
+}
+```
+
+**Note:** Users cannot delete their own tasks. Admins can delete any task using the admin endpoint.
 
 #### Toggle Task Status
 ```http

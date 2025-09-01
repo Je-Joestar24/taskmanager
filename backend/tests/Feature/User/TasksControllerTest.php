@@ -222,36 +222,6 @@ class TasksControllerTest extends TestCase
     }
 
     /** @test */
-    public function user_can_delete_task()
-    {
-        Sanctum::actingAs($this->user);
-        
-        $task = Task::factory()->create(['user_id' => $this->user->id]);
-
-        $response = $this->deleteJson("/api/tasks/{$task->id}");
-
-        $response->assertStatus(200)
-                ->assertJson([
-                    'message' => 'Task deleted successfully.'
-                ]);
-
-        $this->assertDatabaseMissing('tasks', ['id' => $task->id]);
-    }
-
-    /** @test */
-    public function user_cannot_delete_other_users_task()
-    {
-        Sanctum::actingAs($this->user);
-        
-        $otherUser = User::factory()->create();
-        $task = Task::factory()->create(['user_id' => $otherUser->id]);
-
-        $response = $this->deleteJson("/api/tasks/{$task->id}");
-
-        $response->assertStatus(403);
-    }
-
-    /** @test */
     public function user_can_toggle_task_status()
     {
         Sanctum::actingAs($this->user);
@@ -380,23 +350,6 @@ class TasksControllerTest extends TestCase
             'title' => 'New Task',
             'order' => 11
         ]);
-    }
-
-    /** @test */
-    public function task_order_is_reordered_after_deletion()
-    {
-        Sanctum::actingAs($this->user);
-        
-        $task1 = Task::factory()->create(['user_id' => $this->user->id, 'order' => 1]);
-        $task2 = Task::factory()->create(['user_id' => $this->user->id, 'order' => 2]);
-        $task3 = Task::factory()->create(['user_id' => $this->user->id, 'order' => 3]);
-
-        // Delete the middle task
-        $this->deleteJson("/api/tasks/{$task2->id}");
-
-        // Remaining tasks should be reordered
-        $this->assertDatabaseHas('tasks', ['id' => $task1->id, 'order' => 1]);
-        $this->assertDatabaseHas('tasks', ['id' => $task3->id, 'order' => 2]);
     }
 
     /** @test */
