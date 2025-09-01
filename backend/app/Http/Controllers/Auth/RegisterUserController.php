@@ -22,14 +22,13 @@ class RegisterUserController extends Controller
             'name'     => 'required|string|max:255',
             'email'    => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
-            'role'     => 'required|string|in:freelancer,client,admin',
         ]);
 
         $user = User::create([
             'name'     => $validated['name'],
             'email'    => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'role'     => $validated['role'],
+            'role'     => 'user',
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
