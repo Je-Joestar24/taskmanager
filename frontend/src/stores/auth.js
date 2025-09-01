@@ -4,7 +4,7 @@ import api from '@/config/api'
 
 export const useAuthStore = defineStore('auth', () => {
   // State
-  const user = ref(null)
+  const user = ref(JSON.parse(localStorage.getItem('user')) || null)
   const token = ref(localStorage.getItem('token') || null)
   const isLoading = ref(false)
   const error = ref(null)
@@ -26,6 +26,7 @@ export const useAuthStore = defineStore('auth', () => {
       token.value = access_token
       user.value = userData
       localStorage.setItem('token', access_token)
+      localStorage.setItem('user', JSON.stringify(userData))
       
       // Set default authorization header for future requests
       api.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
@@ -50,6 +51,7 @@ export const useAuthStore = defineStore('auth', () => {
       token.value = access_token
       user.value = newUser
       localStorage.setItem('token', access_token)
+      localStorage.setItem('user', JSON.stringify(newUser))
       
       // Set default authorization header for future requests
       api.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
@@ -76,6 +78,7 @@ export const useAuthStore = defineStore('auth', () => {
       user.value = null
       error.value = null
       localStorage.removeItem('token')
+      localStorage.removeItem('user')
       delete api.defaults.headers.common['Authorization']
     }
   }
