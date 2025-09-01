@@ -223,20 +223,7 @@ Authorization: Bearer {token}
 }
 ```
 
-#### Delete Task (User)
-```http
-DELETE /api/tasks/{id}
-Authorization: Bearer {token}
-```
-
-**Response (200):**
-```json
-{
-  "message": "Task deleted successfully."
-}
-```
-
-#### Delete Task (Admin)
+#### Delete Task (Admin Only)
 ```http
 DELETE /api/admin/tasks/{id}
 Authorization: Bearer {token}
@@ -254,7 +241,7 @@ Authorization: Bearer {token}
 }
 ```
 
-**Note:** Users cannot delete their own tasks. Admins can delete any task using the admin endpoint.
+**Note:** Only admins can delete tasks. Regular users cannot delete tasks and must contact an admin for task removal.
 
 #### Toggle Task Status
 ```http
@@ -503,6 +490,7 @@ Run specific test files:
 php artisan test tests/Feature/Auth/LoginControllerTest.php
 php artisan test tests/Feature/User/TasksControllerTest.php
 php artisan test tests/Feature/Admin/AdminControllerTest.php
+php artisan test tests/Feature/Admin/AdminTasksControllerTest.php
 php artisan test tests/Unit/CleanupOldTasksTest.php
 ```
 
@@ -601,6 +589,7 @@ php artisan serve
 - **Role-Based Access**: Middleware-based authorization
 - **Password Hashing**: Secure password storage
 - **Token Authentication**: Sanctum-based API authentication
+- **Admin-Only Deletion**: Only administrators can delete tasks for enhanced security
 
 ## 📈 API Status Codes
 

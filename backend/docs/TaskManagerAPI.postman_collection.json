@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "bf158a62-32b9-487a-a340-634686b3ab98",
-		"name": "Task Manager API",
+		"name": "TaskManagerAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "48078216",
 		"_collection_link": "https://jpar1252003-7459091.postman.co/workspace/Jejomar-Parrilla's-Workspace~7501a240-b47b-4415-8aa3-24dde4a9bf55/collection/48078216-bf158a62-32b9-487a-a340-634686b3ab98?action=share&source=collection_link&creator=48078216"
@@ -944,109 +944,6 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"Task created successfully.\",\n    \"data\": {\n        \"id\": 4,\n        \"title\": \"Finish project 4\",\n        \"description\": \"Complete frontend\",\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"order\": 4,\n        \"user_id\": 7,\n        \"created_at\": \"2025-09-01 15:05:56\",\n        \"updated_at\": \"2025-09-01 15:05:56\"\n    }\n}"
-						}
-					]
-				},
-				{
-					"name": "Delete Task",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}/api/tasks/3",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"tasks",
-								"3"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Delete Task",
-							"originalRequest": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{base_url}}/api/tasks/3",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"tasks",
-										"3"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Host",
-									"value": "localhost:8000"
-								},
-								{
-									"key": "Connection",
-									"value": "close"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/8.2.12"
-								},
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private"
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 01 Sep 2025 15:18:12 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Vary",
-									"value": "Origin"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"message\": \"Task deleted successfully.\"\n}"
 						}
 					]
 				},
@@ -2115,7 +2012,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/api/admin/users/1/stats",
+							"raw": "{{base_url}}/api/admin/users/7/stats",
 							"host": [
 								"{{base_url}}"
 							],
@@ -2123,7 +2020,7 @@
 								"api",
 								"admin",
 								"users",
-								"1",
+								"7",
 								"stats"
 							]
 						}
@@ -2268,6 +2165,173 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"data\": {\n        \"user_id\": 7,\n        \"user_name\": \"John Doe\",\n        \"user_email\": \"john@example.com\",\n        \"total_tasks\": 3,\n        \"pending_tasks\": 1,\n        \"completed_tasks\": 2,\n        \"low_priority\": 0,\n        \"medium_priority\": 1,\n        \"high_priority\": 2,\n        \"completion_rate\": 66.67\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tasks/3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Task",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/tasks/3",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"tasks",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 15:18:12 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Task deleted successfully.\"\n}"
+						},
+						{
+							"name": "Delete Task",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/admin/tasks/4",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"tasks",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 17:56:28 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Task deleted successfully by admin.\",\n    \"deleted_task\": {\n        \"id\": 4,\n        \"title\": \"Finish project 4\",\n        \"user_id\": 7\n    }\n}"
 						}
 					]
 				}
