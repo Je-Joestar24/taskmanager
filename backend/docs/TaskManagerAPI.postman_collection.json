@@ -1,0 +1,2311 @@
+{
+	"info": {
+		"_postman_id": "bf158a62-32b9-487a-a340-634686b3ab98",
+		"name": "Task Manager API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48078216",
+		"_collection_link": "https://jpar1252003-7459091.postman.co/workspace/Jejomar-Parrilla's-Workspace~7501a240-b47b-4415-8aa3-24dde4a9bf55/collection/48078216-bf158a62-32b9-487a-a340-634686b3ab98?action=share&source=collection_link&creator=48078216"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Admin Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let json = pm.response.json();\r",
+									"\r",
+									"if (json.access_token) {\r",
+									"    pm.environment.set(\"token\", json.access_token);\r",
+									"    console.log(\"Token saved:\", json.access_token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"admin@example.com\",\r\n  \"password\": \"admin123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Admin Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"admin@example.com\",\r\n  \"password\": \"admin123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 12:45:03 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Login successful.\",\n    \"access_token\": \"3|8zNUyOsldS4bKaSvYOZYz8pEqVypssBPdUFqXyd56e47d519\",\n    \"token_type\": \"Bearer\",\n    \"user\": {\n        \"id\": 1,\n        \"name\": \"Admin User\",\n        \"email\": \"admin@example.com\",\n        \"role\": \"admin\",\n        \"created_at\": \"2025-09-01 11:38:31\",\n        \"updated_at\": \"2025-09-01 11:38:31\"\n    }\n}"
+						},
+						{
+							"name": "Admin Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"admin@example.com\",\r\n  \"password\": \"admin123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 16:14:59 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Login successful.\",\n    \"access_token\": \"13|84UMdiQGOw6clwUYGdkynT5vyLm3wa3ZUA1AsMln0ea722a9\",\n    \"token_type\": \"Bearer\",\n    \"user\": {\n        \"id\": 1,\n        \"name\": \"Admin User\",\n        \"email\": \"admin@example.com\",\n        \"role\": \"admin\",\n        \"created_at\": \"2025-09-01 11:38:31\",\n        \"updated_at\": \"2025-09-01 11:38:31\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "User Registration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let json = pm.response.json();\r",
+									"\r",
+									"if (json.access_token) {\r",
+									"    pm.environment.set(\"token\", json.access_token);\r",
+									"    console.log(\"Token saved:\", json.access_token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Jane Doe\",\r\n  \"email\": \"jane@example.com\",\r\n  \"password\": \"Password@090\",\r\n  \"password_confirmation\": \"Password@090\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "User Registration",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Jane Doe\",\r\n  \"email\": \"jane@example.com\",\r\n  \"password\": \"Password@090\",\r\n  \"password_confirmation\": \"Password@090\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 15:09:53 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Registration successful.\",\n    \"access_token\": \"11|6BlMilPsqevDbwFIUVTpihWXhsXxEjY1TgS1otva7b045906\",\n    \"token_type\": \"Bearer\",\n    \"user\": {\n        \"id\": 8,\n        \"name\": \"Jane Doe\",\n        \"email\": \"jane@example.com\",\n        \"role\": \"user\",\n        \"created_at\": \"2025-09-01 15:09:53\",\n        \"updated_at\": \"2025-09-01 15:09:53\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "User Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let json = pm.response.json();\r",
+									"\r",
+									"if (json.access_token) {\r",
+									"    pm.environment.set(\"token\", json.access_token);\r",
+									"    console.log(\"Token saved:\", json.access_token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"john@example.com\",\r\n  \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "User Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"john@example.com\",\r\n  \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 15:08:13 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Login successful.\",\n    \"access_token\": \"10|msh4AygoOnC6Cug4sqDQu3BhM5GzJrrsXCdihyCJ87399940\",\n    \"token_type\": \"Bearer\",\n    \"user\": {\n        \"id\": 7,\n        \"name\": \"John Doe\",\n        \"email\": \"john@example.com\",\n        \"role\": \"user\",\n        \"created_at\": \"2025-09-01 13:51:40\",\n        \"updated_at\": \"2025-09-01 13:51:40\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let json = pm.response.json();\r",
+									"\r",
+									"// If logout succeeded, clear the token\r",
+									"if (pm.response.code === 200 && json.message) {\r",
+									"    pm.environment.unset(\"token\");\r",
+									"    console.log(\"Token cleared after logout\");\r",
+									"} else {\r",
+									"    console.log(\"Logout failed or unexpected response:\", json);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/logout",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 16:11:57 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Logged out successfully.\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get All Tasks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/tasks/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Tasks",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/tasks/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"tasks",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 15:08:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Finish project\",\n            \"description\": \"Complete backend\",\n            \"status\": \"pending\",\n            \"priority\": \"high\",\n            \"order\": 1,\n            \"user_id\": 7,\n            \"created_at\": \"2025-09-01 14:57:15\",\n            \"updated_at\": \"2025-09-01 14:57:15\"\n        },\n        {\n            \"id\": 2,\n            \"title\": \"Finish project 2\",\n            \"description\": \"Complete frontend\",\n            \"status\": \"pending\",\n            \"priority\": \"high\",\n            \"order\": 2,\n            \"user_id\": 7,\n            \"created_at\": \"2025-09-01 14:59:13\",\n            \"updated_at\": \"2025-09-01 14:59:13\"\n        },\n        {\n            \"id\": 3,\n            \"title\": \"Finish project 2\",\n            \"description\": \"Complete frontend\",\n            \"status\": \"pending\",\n            \"priority\": \"high\",\n            \"order\": 3,\n            \"user_id\": 7,\n            \"created_at\": \"2025-09-01 15:00:46\",\n            \"updated_at\": \"2025-09-01 15:00:46\"\n        },\n        {\n            \"id\": 4,\n            \"title\": \"Finish project 4\",\n            \"description\": \"Complete frontend\",\n            \"status\": \"pending\",\n            \"priority\": \"high\",\n            \"order\": 4,\n            \"user_id\": 7,\n            \"created_at\": \"2025-09-01 15:05:56\",\n            \"updated_at\": \"2025-09-01 15:05:56\"\n        }\n    ],\n    \"meta\": {\n        \"total\": 4,\n        \"pending\": 4,\n        \"completed\": 0,\n        \"low_priority\": 0,\n        \"medium_priority\": 0,\n        \"high_priority\": 4\n    }\n}"
+						},
+						{
+							"name": "Get All Tasks",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/tasks/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"tasks",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 15:12:59 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Finish project\",\n            \"description\": \"Complete backend\",\n            \"status\": \"pending\",\n            \"priority\": \"high\",\n            \"order\": 1,\n            \"user_id\": 7,\n            \"created_at\": \"2025-09-01 14:57:15\",\n            \"updated_at\": \"2025-09-01 14:57:15\"\n        },\n        {\n            \"id\": 2,\n            \"title\": \"Finish project 2\",\n            \"description\": \"Complete frontend\",\n            \"status\": \"pending\",\n            \"priority\": \"high\",\n            \"order\": 2,\n            \"user_id\": 7,\n            \"created_at\": \"2025-09-01 14:59:13\",\n            \"updated_at\": \"2025-09-01 14:59:13\"\n        },\n        {\n            \"id\": 3,\n            \"title\": \"Finish project 2\",\n            \"description\": \"Complete frontend\",\n            \"status\": \"pending\",\n            \"priority\": \"high\",\n            \"order\": 3,\n            \"user_id\": 7,\n            \"created_at\": \"2025-09-01 15:00:46\",\n            \"updated_at\": \"2025-09-01 15:00:46\"\n        },\n        {\n            \"id\": 4,\n            \"title\": \"Finish project 4\",\n            \"description\": \"Complete frontend\",\n            \"status\": \"pending\",\n            \"priority\": \"high\",\n            \"order\": 4,\n            \"user_id\": 7,\n            \"created_at\": \"2025-09-01 15:05:56\",\n            \"updated_at\": \"2025-09-01 15:05:56\"\n        }\n    ],\n    \"meta\": {\n        \"total\": 4,\n        \"pending\": 4,\n        \"completed\": 0,\n        \"low_priority\": 0,\n        \"medium_priority\": 0,\n        \"high_priority\": 4\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Show Task",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tasks/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Show Task",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/tasks/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"tasks",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 15:05:12 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 2,\n        \"title\": \"Finish project 2\",\n        \"description\": \"Complete frontend\",\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"order\": 2,\n        \"user_id\": 7,\n        \"created_at\": \"2025-09-01 14:59:13\",\n        \"updated_at\": \"2025-09-01 14:59:13\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Finish project 4\",\r\n  \"description\": \"Complete frontend\",\r\n  \"status\": \"pending\",\r\n  \"priority\": \"high\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tasks/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Task",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Finish project 4\",\r\n  \"description\": \"Complete frontend\",\r\n  \"status\": \"pending\",\r\n  \"priority\": \"high\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/tasks/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"tasks",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 15:05:56 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Task created successfully.\",\n    \"data\": {\n        \"id\": 4,\n        \"title\": \"Finish project 4\",\n        \"description\": \"Complete frontend\",\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"order\": 4,\n        \"user_id\": 7,\n        \"created_at\": \"2025-09-01 15:05:56\",\n        \"updated_at\": \"2025-09-01 15:05:56\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tasks/3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Task",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/tasks/3",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"tasks",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 15:18:12 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Task deleted successfully.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Finish project updated\",\r\n  \"status\": \"completed\",\r\n  \"priority\": \"medium\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tasks/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Task",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Finish project updated\",\r\n  \"status\": \"completed\",\r\n  \"priority\": \"medium\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/tasks/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"tasks",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 15:14:43 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Task updated successfully.\",\n    \"data\": {\n        \"id\": 1,\n        \"title\": \"Finish project updated\",\n        \"description\": \"Complete backend\",\n        \"status\": \"completed\",\n        \"priority\": \"medium\",\n        \"order\": 1,\n        \"user_id\": 7,\n        \"created_at\": \"2025-09-01 14:57:15\",\n        \"updated_at\": \"2025-09-01 15:14:43\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Reorder Tasks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"tasks\": [\r\n    { \"id\": 4, \"order\": 1 },\r\n    { \"id\": 1, \"order\": 2 },\r\n    { \"id\": 2, \"order\": 3 }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tasks/reorder",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"reorder"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Reorder Task",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"tasks\": [\r\n    { \"id\": 4, \"order\": 1 },\r\n    { \"id\": 1, \"order\": 2 },\r\n    { \"id\": 2, \"order\": 3 }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/tasks/reorder",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"tasks",
+										"reorder"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 15:25:11 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Tasks reordered successfully.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Toggle Task Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"message\": \"Task status updated successfully.\",\r\n  \"data\": {\r\n    \"id\": 2,\r\n    \"title\": \"Finish project updated\",\r\n    \"status\": \"completed\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tasks/2/toggle-status",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"2",
+								"toggle-status"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Toggle Task Status",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"message\": \"Task status updated successfully.\",\r\n  \"data\": {\r\n    \"id\": 2,\r\n    \"title\": \"Finish project updated\",\r\n    \"status\": \"completed\"\r\n  }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/tasks/2/toggle-status",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"tasks",
+										"2",
+										"toggle-status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 15:27:51 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Task status updated successfully.\",\n    \"data\": {\n        \"id\": 2,\n        \"title\": \"Finish project 2\",\n        \"description\": \"Complete frontend\",\n        \"status\": \"completed\",\n        \"priority\": \"high\",\n        \"order\": 3,\n        \"user_id\": 7,\n        \"created_at\": \"2025-09-01 14:59:13\",\n        \"updated_at\": \"2025-09-01 15:27:51\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Task Statistics",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tasks/statistics",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"statistics"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Task Statistics",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/tasks/statistics",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"tasks",
+										"statistics"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 15:32:19 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"total\": 3,\n        \"pending\": 1,\n        \"completed\": 2,\n        \"low_priority\": 0,\n        \"medium_priority\": 1,\n        \"high_priority\": 2,\n        \"completion_rate\": 66.67\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Dashboard",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/admin/dashboard",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"dashboard"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Dashboard",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/admin/dashboard",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"dashboard"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 16:16:37 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"total_users\": 8,\n        \"total_tasks\": 3,\n        \"pending_tasks\": 1,\n        \"completed_tasks\": 2,\n        \"completion_rate\": 66.67\n    }\n}"
+						},
+						{
+							"name": "Dashboard",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/admin/dashboard",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"dashboard"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 16:18:13 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized. Admin access only.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/admin/users?per_page=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"users"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/admin/users?per_page=10",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"users"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 16:21:21 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Admin User\",\n            \"email\": \"admin@example.com\",\n            \"email_verified_at\": null,\n            \"role\": \"admin\",\n            \"created_at\": \"2025-09-01T11:38:31.000000Z\",\n            \"updated_at\": \"2025-09-01T11:38:31.000000Z\",\n            \"total_tasks\": 0,\n            \"pending_tasks\": 0,\n            \"completed_tasks\": 0,\n            \"tasks\": []\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Colton Toy\",\n            \"email\": \"maggio.brianne@example.com\",\n            \"email_verified_at\": \"2025-09-01T11:38:31.000000Z\",\n            \"role\": \"user\",\n            \"created_at\": \"2025-09-01T11:38:31.000000Z\",\n            \"updated_at\": \"2025-09-01T11:38:31.000000Z\",\n            \"total_tasks\": 0,\n            \"pending_tasks\": 0,\n            \"completed_tasks\": 0,\n            \"tasks\": []\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Dr. Vida Batz PhD\",\n            \"email\": \"sydney.carroll@example.com\",\n            \"email_verified_at\": \"2025-09-01T11:38:31.000000Z\",\n            \"role\": \"user\",\n            \"created_at\": \"2025-09-01T11:38:31.000000Z\",\n            \"updated_at\": \"2025-09-01T11:38:31.000000Z\",\n            \"total_tasks\": 0,\n            \"pending_tasks\": 0,\n            \"completed_tasks\": 0,\n            \"tasks\": []\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Reinhold Bins\",\n            \"email\": \"ruben.goodwin@example.org\",\n            \"email_verified_at\": \"2025-09-01T11:38:31.000000Z\",\n            \"role\": \"user\",\n            \"created_at\": \"2025-09-01T11:38:31.000000Z\",\n            \"updated_at\": \"2025-09-01T11:38:31.000000Z\",\n            \"total_tasks\": 0,\n            \"pending_tasks\": 0,\n            \"completed_tasks\": 0,\n            \"tasks\": []\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Asha Batz\",\n            \"email\": \"cade49@example.com\",\n            \"email_verified_at\": \"2025-09-01T11:38:31.000000Z\",\n            \"role\": \"user\",\n            \"created_at\": \"2025-09-01T11:38:31.000000Z\",\n            \"updated_at\": \"2025-09-01T11:38:31.000000Z\",\n            \"total_tasks\": 0,\n            \"pending_tasks\": 0,\n            \"completed_tasks\": 0,\n            \"tasks\": []\n        },\n        {\n            \"id\": 6,\n            \"name\": \"Dr. Alfred Kassulke\",\n            \"email\": \"dalton70@example.net\",\n            \"email_verified_at\": \"2025-09-01T11:38:31.000000Z\",\n            \"role\": \"user\",\n            \"created_at\": \"2025-09-01T11:38:31.000000Z\",\n            \"updated_at\": \"2025-09-01T11:38:31.000000Z\",\n            \"total_tasks\": 0,\n            \"pending_tasks\": 0,\n            \"completed_tasks\": 0,\n            \"tasks\": []\n        },\n        {\n            \"id\": 7,\n            \"name\": \"John Doe\",\n            \"email\": \"john@example.com\",\n            \"email_verified_at\": null,\n            \"role\": \"user\",\n            \"created_at\": \"2025-09-01T13:51:40.000000Z\",\n            \"updated_at\": \"2025-09-01T13:51:40.000000Z\",\n            \"total_tasks\": 3,\n            \"pending_tasks\": 1,\n            \"completed_tasks\": 2,\n            \"tasks\": [\n                {\n                    \"id\": 4,\n                    \"title\": \"Finish project 4\",\n                    \"description\": \"Complete frontend\",\n                    \"status\": \"pending\",\n                    \"priority\": \"high\",\n                    \"order\": 1,\n                    \"user_id\": 7,\n                    \"created_at\": \"2025-09-01T15:05:56.000000Z\",\n                    \"updated_at\": \"2025-09-01T15:25:11.000000Z\"\n                },\n                {\n                    \"id\": 2,\n                    \"title\": \"Finish project 2\",\n                    \"description\": \"Complete frontend\",\n                    \"status\": \"completed\",\n                    \"priority\": \"high\",\n                    \"order\": 3,\n                    \"user_id\": 7,\n                    \"created_at\": \"2025-09-01T14:59:13.000000Z\",\n                    \"updated_at\": \"2025-09-01T15:27:51.000000Z\"\n                },\n                {\n                    \"id\": 1,\n                    \"title\": \"Finish project updated\",\n                    \"description\": \"Complete backend\",\n                    \"status\": \"completed\",\n                    \"priority\": \"medium\",\n                    \"order\": 2,\n                    \"user_id\": 7,\n                    \"created_at\": \"2025-09-01T14:57:15.000000Z\",\n                    \"updated_at\": \"2025-09-01T15:25:11.000000Z\"\n                }\n            ]\n        },\n        {\n            \"id\": 8,\n            \"name\": \"Jane Doe\",\n            \"email\": \"jane@example.com\",\n            \"email_verified_at\": null,\n            \"role\": \"user\",\n            \"created_at\": \"2025-09-01T15:09:53.000000Z\",\n            \"updated_at\": \"2025-09-01T15:09:53.000000Z\",\n            \"total_tasks\": 0,\n            \"pending_tasks\": 0,\n            \"completed_tasks\": 0,\n            \"tasks\": []\n        }\n    ],\n    \"meta\": {\n        \"current_page\": 1,\n        \"last_page\": 1,\n        \"per_page\": 10,\n        \"total\": 8\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Task",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/admin/tasks?per_page=10&status=pending&priority=high&search=project",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "status",
+									"value": "pending"
+								},
+								{
+									"key": "priority",
+									"value": "high"
+								},
+								{
+									"key": "search",
+									"value": "project"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Task",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/admin/tasks",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"tasks"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 16:25:33 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 4,\n            \"title\": \"Finish project 4\",\n            \"description\": \"Complete frontend\",\n            \"status\": \"pending\",\n            \"priority\": \"high\",\n            \"order\": 1,\n            \"user_id\": 7,\n            \"created_at\": \"2025-09-01T15:05:56.000000Z\",\n            \"updated_at\": \"2025-09-01T15:25:11.000000Z\",\n            \"user\": {\n                \"id\": 7,\n                \"name\": \"John Doe\",\n                \"email\": \"john@example.com\",\n                \"role\": \"user\"\n            }\n        },\n        {\n            \"id\": 2,\n            \"title\": \"Finish project 2\",\n            \"description\": \"Complete frontend\",\n            \"status\": \"completed\",\n            \"priority\": \"high\",\n            \"order\": 3,\n            \"user_id\": 7,\n            \"created_at\": \"2025-09-01T14:59:13.000000Z\",\n            \"updated_at\": \"2025-09-01T15:27:51.000000Z\",\n            \"user\": {\n                \"id\": 7,\n                \"name\": \"John Doe\",\n                \"email\": \"john@example.com\",\n                \"role\": \"user\"\n            }\n        },\n        {\n            \"id\": 1,\n            \"title\": \"Finish project updated\",\n            \"description\": \"Complete backend\",\n            \"status\": \"completed\",\n            \"priority\": \"medium\",\n            \"order\": 2,\n            \"user_id\": 7,\n            \"created_at\": \"2025-09-01T14:57:15.000000Z\",\n            \"updated_at\": \"2025-09-01T15:25:11.000000Z\",\n            \"user\": {\n                \"id\": 7,\n                \"name\": \"John Doe\",\n                \"email\": \"john@example.com\",\n                \"role\": \"user\"\n            }\n        }\n    ],\n    \"meta\": {\n        \"current_page\": 1,\n        \"last_page\": 1,\n        \"per_page\": 15,\n        \"total\": 3\n    }\n}"
+						},
+						{
+							"name": "Get All Task filter",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/admin/tasks?per_page=10&status=pending&priority=high",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"tasks"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "10"
+										},
+										{
+											"key": "status",
+											"value": "pending"
+										},
+										{
+											"key": "priority",
+											"value": "high"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 16:26:19 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 4,\n            \"title\": \"Finish project 4\",\n            \"description\": \"Complete frontend\",\n            \"status\": \"pending\",\n            \"priority\": \"high\",\n            \"order\": 1,\n            \"user_id\": 7,\n            \"created_at\": \"2025-09-01T15:05:56.000000Z\",\n            \"updated_at\": \"2025-09-01T15:25:11.000000Z\",\n            \"user\": {\n                \"id\": 7,\n                \"name\": \"John Doe\",\n                \"email\": \"john@example.com\",\n                \"role\": \"user\"\n            }\n        }\n    ],\n    \"meta\": {\n        \"current_page\": 1,\n        \"last_page\": 1,\n        \"per_page\": 10,\n        \"total\": 1\n    }\n}"
+						},
+						{
+							"name": "Get All Task Full Filter",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/admin/tasks?per_page=10&status=pending&priority=high&search=project",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"tasks"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "10"
+										},
+										{
+											"key": "status",
+											"value": "pending"
+										},
+										{
+											"key": "priority",
+											"value": "high"
+										},
+										{
+											"key": "search",
+											"value": "project"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 16:27:10 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 4,\n            \"title\": \"Finish project 4\",\n            \"description\": \"Complete frontend\",\n            \"status\": \"pending\",\n            \"priority\": \"high\",\n            \"order\": 1,\n            \"user_id\": 7,\n            \"created_at\": \"2025-09-01T15:05:56.000000Z\",\n            \"updated_at\": \"2025-09-01T15:25:11.000000Z\",\n            \"user\": {\n                \"id\": 7,\n                \"name\": \"John Doe\",\n                \"email\": \"john@example.com\",\n                \"role\": \"user\"\n            }\n        }\n    ],\n    \"meta\": {\n        \"current_page\": 1,\n        \"last_page\": 1,\n        \"per_page\": 10,\n        \"total\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get User Stats",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/admin/users/1/stats",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"users",
+								"1",
+								"stats"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get User Stats ID 1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/admin/users/1/stats",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"users",
+										"1",
+										"stats"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 16:30:43 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"user_id\": 1,\n        \"user_name\": \"Admin User\",\n        \"user_email\": \"admin@example.com\",\n        \"total_tasks\": 0,\n        \"pending_tasks\": 0,\n        \"completed_tasks\": 0,\n        \"low_priority\": 0,\n        \"medium_priority\": 0,\n        \"high_priority\": 0,\n        \"completion_rate\": 0\n    }\n}"
+						},
+						{
+							"name": "Get User Stats ID 7",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/admin/users/7/stats",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"users",
+										"7",
+										"stats"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 01 Sep 2025 16:33:27 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"user_id\": 7,\n        \"user_name\": \"John Doe\",\n        \"user_email\": \"john@example.com\",\n        \"total_tasks\": 3,\n        \"pending_tasks\": 1,\n        \"completed_tasks\": 2,\n        \"low_priority\": 0,\n        \"medium_priority\": 1,\n        \"high_priority\": 2,\n        \"completion_rate\": 66.67\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "6|UsUnDTDygXuDNPBPL0VaMBfttNMi1xO3Uoof2ht767537ac5",
+			"type": "string"
+		}
+	]
+}
