@@ -122,6 +122,16 @@
       </div>
     </div>
 
+    <!-- Loading State -->
+    <div v-if="notifStore.loadingStates.dashboard" class="fixed inset-0 bg-bg-overlay/50 flex items-center justify-center z-50">
+      <div class="bg-bg-card p-6 rounded-card shadow-lg">
+        <div class="flex items-center space-x-3">
+          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+          <span class="text-text">Loading dashboard...</span>
+        </div>
+      </div>
+    </div>
+
     <!-- Quick Actions -->
     <div class="bg-bg-card border border-border rounded-card p-6 shadow-md">
       <h3 class="text-lg font-semibold text-text mb-4">Quick Actions</h3>
@@ -158,16 +168,6 @@
       </div>
     </div>
 
-    <!-- Loading State -->
-    <div v-if="adminStore.isLoading" class="fixed inset-0 bg-bg-overlay/50 flex items-center justify-center z-50">
-      <div class="bg-bg-card p-6 rounded-card shadow-lg">
-        <div class="flex items-center space-x-3">
-          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-          <span class="text-text">Loading dashboard...</span>
-        </div>
-      </div>
-    </div>
-
     <!-- Error State -->
     <div v-if="adminStore.error" class="fixed top-4 right-4 bg-error text-text-inverse p-4 rounded-card shadow-lg z-50">
       <div class="flex items-center space-x-2">
@@ -189,9 +189,11 @@
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAdminStore } from '@/stores/admin'
+import { useNotifStore } from '@/stores/notif'
 
 const router = useRouter()
 const adminStore = useAdminStore()
+const notifStore = useNotifStore()
 
 // Navigation methods
 const navigateToUsers = () => {

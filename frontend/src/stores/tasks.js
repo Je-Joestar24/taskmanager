@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import api from '@/config/api'
+import { useNotifStore } from './notif'
 
 export const useTasksStore = defineStore('tasks', () => {
   // State
   const tasks = ref([])
-  const isLoading = ref(false)
   const error = ref(null)
   const filters = ref({
     status: '',
@@ -21,6 +21,9 @@ export const useTasksStore = defineStore('tasks', () => {
     high_priority: 0,
     completion_rate: 0
   })
+
+  // Notification store
+  const notifStore = useNotifStore()
 
   // Getters
   const filteredTasks = computed(() => {
@@ -58,7 +61,7 @@ export const useTasksStore = defineStore('tasks', () => {
 
   // Actions
   const fetchTasks = async (params = {}) => {
-    isLoading.value = true
+    notifStore.setLoadingState('tasks', true)
     error.value = null
     
     try {
@@ -79,14 +82,15 @@ export const useTasksStore = defineStore('tasks', () => {
       return response.data
     } catch (err) {
       error.value = err.response?.data?.message || 'Failed to fetch tasks'
+      notifStore.toastError(error.value)
       throw err
     } finally {
-      isLoading.value = false
+      notifStore.setLoadingState('tasks', false)
     }
   }
 
   const createTask = async (taskData) => {
-    isLoading.value = true
+    notifStore.setLoadingState('tasks', true)
     error.value = null
     
     try {
@@ -94,17 +98,19 @@ export const useTasksStore = defineStore('tasks', () => {
       const newTask = response.data.data
       tasks.value.push(newTask)
       await fetchStatistics()
+      notifStore.toastSuccess('Task created successfully!')
       return response.data
     } catch (err) {
       error.value = err.response?.data?.message || 'Failed to create task'
+      notifStore.toastError(error.value)
       throw err
     } finally {
-      isLoading.value = false
+      notifStore.setLoadingState('tasks', false)
     }
   }
 
   const updateTask = async (taskId, taskData) => {
-    isLoading.value = true
+    notifStore.setLoadingState('tasks', true)
     error.value = null
     
     try {
@@ -117,34 +123,38 @@ export const useTasksStore = defineStore('tasks', () => {
       }
       
       await fetchStatistics()
+      notifStore.toastSuccess('Task updated successfully!')
       return response.data
     } catch (err) {
       error.value = err.response?.data?.message || 'Failed to update task'
+      notifStore.toastError(error.value)
       throw err
     } finally {
-      isLoading.value = false
+      notifStore.setLoadingState('tasks', false)
     }
   }
 
   const deleteTask = async (taskId) => {
-    isLoading.value = true
+    notifStore.setLoadingState('tasks', true)
     error.value = null
     
     try {
       await api.delete(`/api/admin/tasks/${taskId}`)
       tasks.value = tasks.value.filter(task => task.id !== taskId)
       await fetchStatistics()
+      notifStore.toastSuccess('Task deleted successfully!')
       return { success: true }
     } catch (err) {
       error.value = err.response?.data?.message || 'Failed to delete task'
+      notifStore.toastError(error.value)
       throw err
     } finally {
-      isLoading.value = false
+      notifStore.setLoadingState('tasks', false)
     }
   }
 
   const toggleTaskStatus = async (taskId) => {
-    isLoading.value = true
+    notifStore.setLoadingState('tasks', true)
     error.value = null
     
     try {
@@ -157,17 +167,20 @@ export const useTasksStore = defineStore('tasks', () => {
       }
       
       await fetchStatistics()
+      const status = updatedTask.status === 'completed' ? 'completed' : 'marked as pending'
+      notifStore.toastSuccess(`Task ${status}!`)
       return response.data
     } catch (err) {
       error.value = err.response?.data?.message || 'Failed to toggle task status'
+      notifStore.toastError(error.value)
       throw err
     } finally {
-      isLoading.value = false
+      notifStore.setLoadingState('tasks', false)
     }
   }
 
   const reorderTasks = async (reorderedTasks) => {
-    isLoading.value = true
+    notifStore.setLoadingState('tasks', true)
     error.value = null
     
     try {
@@ -186,12 +199,14 @@ export const useTasksStore = defineStore('tasks', () => {
         }
       })
       
+      notifStore.toastSuccess('Tasks reordered successfully!')
       return { success: true }
     } catch (err) {
       error.value = err.response?.data?.message || 'Failed to reorder tasks'
+      notifStore.toastError(error.value)
       throw err
     } finally {
-      isLoading.value = false
+      notifStore.setLoadingState('tasks', false)
     }
   }
 
@@ -224,7 +239,6 @@ export const useTasksStore = defineStore('tasks', () => {
   return {
     // State
     tasks,
-    isLoading,
     error,
     filters,
     statistics,

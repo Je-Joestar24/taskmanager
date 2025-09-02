@@ -1,13 +1,16 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import api from '@/config/api'
+import { useNotifStore } from './notif'
 
 export const useAuthStore = defineStore('auth', () => {
   // State
   const user = ref(JSON.parse(localStorage.getItem('user')) || null)
   const token = ref(localStorage.getItem('token') || null)
-  const isLoading = ref(false)
   const error = ref(null)
+
+  // Notification store
+  const notifStore = useNotifStore()
 
   // Getters
   const isAuthenticated = computed(() => !!token.value)
@@ -16,7 +19,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   // Actions
   const login = async (credentials) => {
-    isLoading.value = true
+    notifStore.setLoadingState('auth', true)
     error.value = null
     
     try {
@@ -31,17 +34,19 @@ export const useAuthStore = defineStore('auth', () => {
       // Set default authorization header for future requests
       api.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
       
+      notifStore.toastSuccess('Login successful!')
       return response.data
     } catch (err) {
       error.value = err.response?.data?.message || 'Login failed'
+      notifStore.toastError(error.value)
       throw err
     } finally {
-      isLoading.value = false
+      notifStore.setLoadingState('auth', false)
     }
   }
 
   const register = async (userData) => {
-    isLoading.value = true
+    notifStore.setLoadingState('auth', true)
     error.value = null
     
     try {
@@ -56,12 +61,14 @@ export const useAuthStore = defineStore('auth', () => {
       // Set default authorization header for future requests
       api.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
       
+      notifStore.toastSuccess('Registration successful!')
       return response.data
     } catch (err) {
       error.value = err.response?.data?.message || 'Registration failed'
+      notifStore.toastError(error.value)
       throw err
     } finally {
-      isLoading.value = false
+      notifStore.setLoadingState('auth', false)
     }
   }
 
@@ -80,6 +87,8 @@ export const useAuthStore = defineStore('auth', () => {
       localStorage.removeItem('token')
       localStorage.removeItem('user')
       delete api.defaults.headers.common['Authorization']
+      
+      notifStore.toastSuccess('Logged out successfully')
     }
   }
 
@@ -95,7 +104,7 @@ export const useAuthStore = defineStore('auth', () => {
       // user.value = response.data
       
       return true
-    } catch (err) {
+    } catch {
       // Token is invalid, clear it
       logout()
       return false
@@ -110,7 +119,6 @@ export const useAuthStore = defineStore('auth', () => {
     // State
     user,
     token,
-    isLoading,
     error,
     
     // Getters

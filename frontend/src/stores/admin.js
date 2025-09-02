@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import api from '@/config/api'
+import { useNotifStore } from './notif'
 
 export const useAdminStore = defineStore('admin', () => {
   // State
@@ -13,12 +14,14 @@ export const useAdminStore = defineStore('admin', () => {
   })
   const allUsers = ref([])
   const allTasks = ref([])
-  const isLoading = ref(false)
   const error = ref(null)
   
   // Search state
   const userSearch = ref('')
   const userSearchTimeout = ref(null)
+
+  // Notification store
+  const notifStore = useNotifStore()
 
   // Getters
   const userStats = computed(() => {
@@ -38,23 +41,25 @@ export const useAdminStore = defineStore('admin', () => {
 
   // Actions
   const fetchDashboardStats = async () => {
-    isLoading.value = true
+    notifStore.setLoadingState('dashboard', true)
     error.value = null
     
     try {
       const response = await api.get('/api/admin/dashboard')
       dashboardStats.value = response.data.data
+      notifStore.toastSuccess('Dashboard stats updated successfully')
       return response.data
     } catch (err) {
       error.value = err.response?.data?.message || 'Failed to fetch dashboard stats'
+      notifStore.toastError(error.value)
       throw err
     } finally {
-      isLoading.value = false
+      notifStore.setLoadingState('dashboard', false)
     }
   }
 
   const fetchAllUsers = async (params = {}) => {
-    isLoading.value = true
+    notifStore.setLoadingState('users', true)
     error.value = null
     
     try {
@@ -68,9 +73,10 @@ export const useAdminStore = defineStore('admin', () => {
       return response.data
     } catch (err) {
       error.value = err.response?.data?.message || 'Failed to fetch users'
+      notifStore.toastError(error.value)
       throw err
     } finally {
-      isLoading.value = false
+      notifStore.setLoadingState('users', false)
     }
   }
 
@@ -91,7 +97,7 @@ export const useAdminStore = defineStore('admin', () => {
   }
 
   const fetchAllTasks = async (params = {}) => {
-    isLoading.value = true
+    notifStore.setLoadingState('admin', true)
     error.value = null
     
     try {
@@ -105,14 +111,15 @@ export const useAdminStore = defineStore('admin', () => {
       return response.data
     } catch (err) {
       error.value = err.response?.data?.message || 'Failed to fetch all tasks'
+      notifStore.toastError(error.value)
       throw err
     } finally {
-      isLoading.value = false
+      notifStore.setLoadingState('admin', false)
     }
   }
 
   const fetchUserStats = async (userId) => {
-    isLoading.value = true
+    notifStore.setLoadingState('users', true)
     error.value = null
     
     try {
@@ -120,14 +127,15 @@ export const useAdminStore = defineStore('admin', () => {
       return response.data
     } catch (err) {
       error.value = err.response?.data?.message || 'Failed to fetch user stats'
+      notifStore.toastError(error.value)
       throw err
     } finally {
-      isLoading.value = false
+      notifStore.setLoadingState('users', false)
     }
   }
 
   const deleteTaskAsAdmin = async (taskId) => {
-    isLoading.value = true
+    notifStore.setLoadingState('admin', true)
     error.value = null
     
     try {
@@ -139,12 +147,14 @@ export const useAdminStore = defineStore('admin', () => {
       // Update dashboard stats
       await fetchDashboardStats()
       
+      notifStore.toastSuccess('Task deleted successfully')
       return response.data
     } catch (err) {
       error.value = err.response?.data?.message || 'Failed to delete task'
+      notifStore.toastError(error.value)
       throw err
     } finally {
-      isLoading.value = false
+      notifStore.setLoadingState('admin', false)
     }
   }
 
@@ -162,7 +172,6 @@ export const useAdminStore = defineStore('admin', () => {
     dashboardStats,
     allUsers,
     allTasks,
-    isLoading,
     error,
     userSearch,
     
