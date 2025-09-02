@@ -61,14 +61,7 @@ export default {
             borderRadius: {
                 card: "var(--theme-card-radius)",
             },
-
-            screens: {
-                xl: "var(--container-xl)",
-                lg: "var(--container-lg)",
-                md: "var(--container-md)",
-                sm: "var(--container-sm)",
-            },
-
+            
             transitionProperty: {
                 theme: "var(--theme-transition)",
                 fast: "var(--theme-transition-fast)",

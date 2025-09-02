@@ -34,7 +34,7 @@ export const requireAdmin = async (to, from, next) => {
   
   // Then check admin role
   if (!authStore.isAdmin) {
-    next({ name: 'dashboard', replace: true })
+    next({ name: 'Task', replace: true })
     return
   }
   
@@ -50,7 +50,7 @@ export const requireGuest = (to, from, next) => {
     if (authStore.isAdmin) {
       next({ name: 'admin-dashboard', replace: true })
     } else {
-      next({ name: 'dashboard', replace: true })
+      next({ name: 'Task', replace: true })
     }
     return
   }

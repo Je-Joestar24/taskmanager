@@ -18,7 +18,7 @@ router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
   
   // If route requires guest access and user is authenticated
-  if (to.meta.requiresGuest && authStore.isAuthenticated) {
+  if (to.meta.requireGuest && authStore.isAuthenticated) {
     if (authStore.isAdmin) {
       next({ name: 'admin-dashboard', replace: true })
     } else {
@@ -41,7 +41,7 @@ router.beforeEach(async (to, from, next) => {
     if (!authStore.isAuthenticated) {
       next({ name: 'login', query: { redirect: to.fullPath } })
     } else {
-      next({ name: 'dashboard', replace: true })
+      next({ name: 'tasks', replace: true })
     }
     return
   }
