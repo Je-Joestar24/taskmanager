@@ -21,6 +21,7 @@ export const useTasksStore = defineStore('tasks', () => {
     high_priority: 0,
     completion_rate: 0
   })
+  const editingTask = ref(null)
 
   // Notification store
   const notifStore = useNotifStore()
@@ -236,12 +237,21 @@ export const useTasksStore = defineStore('tasks', () => {
     error.value = null
   }
 
+  const setEditingTask = (task) => {
+    editingTask.value = { ...task }
+  }
+
+  const clearEditingTask = () => {
+    editingTask.value = null
+  }
+
   return {
     // State
     tasks,
     error,
     filters,
     statistics,
+    editingTask,
     
     // Getters
     filteredTasks,
@@ -258,6 +268,8 @@ export const useTasksStore = defineStore('tasks', () => {
     fetchStatistics,
     setFilters,
     clearFilters,
-    clearError
+    clearError,
+    setEditingTask,
+    clearEditingTask
   }
 })
