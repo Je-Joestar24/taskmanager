@@ -3,7 +3,7 @@ import { requireAuth, requireAdmin, requireGuest } from './guards'
 const routes = [
   // Authentication routes
   {
-    path: '/login',
+    path: '/:login?',
     name: 'login',
     component: () => import('@/views/Auth/LoginView.vue'),
     meta: { 
