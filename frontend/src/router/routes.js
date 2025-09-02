@@ -29,11 +29,11 @@ const routes = [
     beforeEnter: requireGuest
   },
   {
-    path: '/register',
-    name: 'register',
+    path: '/signup',
+    name: 'signup',
     component: () => import('@/views/Auth/SignupView.vue'),
     meta: { 
-      title: 'Register',
+      title: 'Signup',
       requiresGuest: true
     },
     beforeEnter: requireGuest
