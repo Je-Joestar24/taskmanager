@@ -1,11 +1,10 @@
 <script setup>
 import { computed, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useTasksStore } from '@/stores/tasks'
 import { useAdminStore } from '@/stores/admin'
+import GlobalNavs from './components/Navs/GlobalNavs.vue'
 
-const router = useRouter()
 const authStore = useAuthStore()
 const tasksStore = useTasksStore()
 const adminStore = useAdminStore()
@@ -21,14 +20,6 @@ const clearGlobalError = () => {
   adminStore.clearError()
 }
 
-const logout = async () => {
-  try {
-    await authStore.logout()
-    router.push('/login')
-  } catch (error) {
-    console.error('Logout error:', error)
-  }
-}
 
 onMounted(async () => {
   // Check authentication status on app load
@@ -40,81 +31,7 @@ onMounted(async () => {
 
 <template>
   <div id="app" class="min-h-screen bg-bg">
-    <!-- Navigation -->
-    <nav v-if="authStore.isAuthenticated" class="bg-white shadow-sm border-b border-gray-200">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-          <div class="flex items-center">
-            <router-link to="/" class="flex-shrink-0">
-              <h1 class="text-xl font-bold text-indigo-600">Task Manager</h1>
-            </router-link>
-            <div class="hidden md:block ml-10">
-              <div class="flex items-baseline space-x-4">
-                <router-link
-                  to="/dashboard"
-                  class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
-                  :class="{ 'text-indigo-600 bg-indigo-50': $route.name === 'dashboard' }"
-                >
-                  My Tasks
-                </router-link>
-                <router-link
-                  v-if="authStore.isAdmin"
-                  to="/admin"
-                  class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
-                  :class="{ 'text-indigo-600 bg-indigo-50': $route.path.startsWith('/admin') }"
-                >
-                  Admin Panel
-                </router-link>
-              </div>
-            </div>
-          </div>
-          
-          <div class="flex items-center space-x-4">
-            <div class="hidden md:block">
-              <div class="flex items-center space-x-2">
-                <span class="text-sm text-gray-600">Welcome, {{ authStore.user?.name }}</span>
-                <span
-                  :class="[
-                    'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
-                    authStore.isAdmin ? 'bg-purple-100 text-purple-800' : 'bg-gray-100 text-gray-800'
-                  ]"
-                >
-                  {{ authStore.user?.role }}
-                </span>
-              </div>
-            </div>
-            <button
-              @click="logout"
-              class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200"
-            >
-              Logout
-            </button>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Mobile Navigation -->
-    <nav v-if="authStore.isAuthenticated" class="md:hidden bg-white shadow-sm border-b border-gray-200">
-      <div class="px-2 pt-2 pb-3 space-y-1">
-        <router-link
-          to="/dashboard"
-          class="text-gray-600 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
-          :class="{ 'text-indigo-600 bg-indigo-50': $route.name === 'dashboard' }"
-        >
-          My Tasks
-        </router-link>
-        <router-link
-          v-if="authStore.isAdmin"
-          to="/admin"
-          class="text-gray-600 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
-          :class="{ 'text-indigo-600 bg-indigo-50': $route.path.startsWith('/admin') }"
-        >
-          Admin Panel
-        </router-link>
-      </div>
-    </nav>
-
+    <GlobalNavs/>
     <!-- Main Content -->
     <main>
       <router-view />
