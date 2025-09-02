@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-bg">
     <div class="flex">
       <!-- Admin Sidebar -->
-      <aside class="w-64 bg-bg-card shadow-sm min-h-screen border-r border-border">
+      <aside class="w-64 hidden sm:block bg-bg-card shadow-sm min-h-screen border-r border-border">
         <nav class="mt-5 px-2">
           <router-link v-for="item in navigation" :key="item.name" :to="item.href" :class="[
             $route.name === item.routeName

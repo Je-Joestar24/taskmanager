@@ -1,22 +1,6 @@
 import { requireAuth, requireAdmin, requireGuest } from './guards'
 
 const routes = [
-  // Public routes
-  {
-    path: '/',
-    name: 'home',
-    component: () => import('@/views/HomeView.vue'),
-    meta: { title: 'Home', requireGuest: true },
-    beforeEnter: requireGuest
-  },
-  {
-    path: '/about',
-    name: 'about',
-    component: () => import('@/views/AboutView.vue'),
-    meta: { title: 'About', requireGuest: true },
-    beforeEnter: requireGuest
-  },
-
   // Authentication routes
   {
     path: '/login',

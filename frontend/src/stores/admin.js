@@ -15,7 +15,7 @@ export const useAdminStore = defineStore('admin', () => {
   const allUsers = ref([])
   const allTasks = ref([])
   const error = ref(null)
-  
+
   // Search state
   const userSearch = ref('')
   const userSearchTimeout = ref(null)
@@ -31,7 +31,7 @@ export const useAdminStore = defineStore('admin', () => {
         total_tasks: user.total_tasks || 0,
         pending_tasks: user.pending_tasks || 0,
         completed_tasks: user.completed_tasks || 0,
-        completion_rate: user.total_tasks > 0 
+        completion_rate: user.total_tasks > 0
           ? ((user.completed_tasks || 0) / user.total_tasks * 100).toFixed(2)
           : 0
       }
@@ -43,7 +43,7 @@ export const useAdminStore = defineStore('admin', () => {
   const fetchDashboardStats = async () => {
     notifStore.setLoadingState('dashboard', true)
     error.value = null
-    
+
     try {
       const response = await api.get('/api/admin/dashboard')
       dashboardStats.value = response.data.data
@@ -61,7 +61,7 @@ export const useAdminStore = defineStore('admin', () => {
   const fetchAllUsers = async (params = {}) => {
     notifStore.setLoadingState('users', true)
     error.value = null
-    
+
     try {
       const queryParams = new URLSearchParams()
       Object.entries(params).forEach(([key, value]) => {
@@ -99,7 +99,7 @@ export const useAdminStore = defineStore('admin', () => {
   const fetchAllTasks = async (params = {}) => {
     notifStore.setLoadingState('admin', true)
     error.value = null
-    
+
     try {
       const queryParams = new URLSearchParams()
       Object.entries(params).forEach(([key, value]) => {
@@ -119,9 +119,9 @@ export const useAdminStore = defineStore('admin', () => {
   }
 
   const fetchUserStats = async (userId) => {
-    notifStore.setLoadingState('users', true)
+    notifStore.setLoading(true)
     error.value = null
-    
+
     try {
       const response = await api.get(`/api/admin/users/${userId}/stats`)
       return response.data
@@ -130,23 +130,23 @@ export const useAdminStore = defineStore('admin', () => {
       notifStore.toastError(error.value)
       throw err
     } finally {
-      notifStore.setLoadingState('users', false)
+      notifStore.setLoading(false)
     }
   }
 
   const deleteTaskAsAdmin = async (taskId) => {
     notifStore.setLoadingState('admin', true)
     error.value = null
-    
+
     try {
       const response = await api.delete(`/api/admin/tasks/${taskId}`)
-      
+
       // Remove from allTasks if it exists there
       allTasks.value = allTasks.value.filter(task => task.id !== taskId)
-      
+
       // Update dashboard stats
       await fetchDashboardStats()
-      
+
       notifStore.toastSuccess('Task deleted successfully')
       return response.data
     } catch (err) {
@@ -174,10 +174,10 @@ export const useAdminStore = defineStore('admin', () => {
     allTasks,
     error,
     userSearch,
-    
+
     // Getters
     userStats,
-    
+
     // Actions
     fetchDashboardStats,
     fetchAllUsers,
