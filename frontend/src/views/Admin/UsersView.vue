@@ -5,8 +5,38 @@
       <div>
         <h2 class="text-2xl font-bold text-text">All Users</h2>
         <p class="mt-1 text-sm text-text-muted">
-          View all registered users and their task statistics
+          View all registered users (excluding admins) and their task statistics
         </p>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="bg-bg-card border border-border rounded-card p-4 shadow-sm">
+      <div class="flex items-center space-x-3">
+        <div class="flex-1 relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <input
+            v-model="adminStore.userSearch"
+            @input="handleSearch"
+            type="text"
+            placeholder="Search users by name or email..."
+            class="block w-full pl-10 pr-3 py-2 border border-border rounded-card bg-bg text-text placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors duration-200"
+          />
+        </div>
+        <button
+          v-if="adminStore.userSearch"
+          @click="adminStore.clearUserSearch"
+          class="px-4 py-2 text-sm font-medium text-text bg-bg-secondary border border-border rounded-card hover:bg-bg-tertiary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
+        >
+          Clear
+        </button>
+      </div>
+      <div v-if="adminStore.userSearch" class="mt-2 text-sm text-text-muted">
+        Searching for: "{{ adminStore.userSearch }}"
       </div>
     </div>
 
@@ -36,8 +66,12 @@
         <svg class="mx-auto h-12 w-12 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
         </svg>
-        <h3 class="mt-2 text-sm font-medium text-text">No users found</h3>
-        <p class="mt-1 text-sm text-text-muted">No users have registered yet.</p>
+        <h3 class="mt-2 text-sm font-medium text-text">
+          {{ adminStore.userSearch ? 'No users found' : 'No users found' }}
+        </h3>
+        <p class="mt-1 text-sm text-text-muted">
+          {{ adminStore.userSearch ? `No users match "${adminStore.userSearch}"` : 'No regular users have registered yet.' }}
+        </p>
       </div>
 
       <ul v-else class="divide-y divide-border">
@@ -63,12 +97,7 @@
                   <p class="text-sm text-text-muted">{{ user.email }}</p>
                 </div>
                 <span
-                  :class="[
-                    'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
-                    user.role === 'admin' 
-                      ? 'bg-accent/20 text-accent' 
-                      : 'bg-bg-secondary text-text-secondary'
-                  ]"
+                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-bg-secondary text-text-secondary"
                 >
                   {{ user.role }}
                 </span>
@@ -179,6 +208,14 @@ const adminStore = useAdminStore()
 
 const showUserStatsModal = ref(false)
 const selectedUserStats = ref(null)
+
+const handleSearch = () => {
+  if (adminStore.userSearch.trim()) {
+    adminStore.searchUsers(adminStore.userSearch.trim())
+  } else {
+    adminStore.fetchAllUsers()
+  }
+}
 
 const viewUserStats = async (userId) => {
   try {

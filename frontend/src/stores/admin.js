@@ -15,6 +15,10 @@ export const useAdminStore = defineStore('admin', () => {
   const allTasks = ref([])
   const isLoading = ref(false)
   const error = ref(null)
+  
+  // Search state
+  const userSearch = ref('')
+  const userSearchTimeout = ref(null)
 
   // Getters
   const userStats = computed(() => {
@@ -68,6 +72,22 @@ export const useAdminStore = defineStore('admin', () => {
     } finally {
       isLoading.value = false
     }
+  }
+
+  const searchUsers = async (searchTerm) => {
+    // Clear previous timeout
+    if (userSearchTimeout.value) {
+      clearTimeout(userSearchTimeout.value)
+    }
+
+    // Set new timeout for debounced search
+    userSearchTimeout.value = setTimeout(async () => {
+      try {
+        await fetchAllUsers({ search: searchTerm })
+      } catch (error) {
+        console.error('Search failed:', error)
+      }
+    }, 300) // 300ms delay
   }
 
   const fetchAllTasks = async (params = {}) => {
@@ -132,6 +152,11 @@ export const useAdminStore = defineStore('admin', () => {
     error.value = null
   }
 
+  const clearUserSearch = () => {
+    userSearch.value = ''
+    fetchAllUsers()
+  }
+
   return {
     // State
     dashboardStats,
@@ -139,6 +164,7 @@ export const useAdminStore = defineStore('admin', () => {
     allTasks,
     isLoading,
     error,
+    userSearch,
     
     // Getters
     userStats,
@@ -149,6 +175,8 @@ export const useAdminStore = defineStore('admin', () => {
     fetchAllTasks,
     fetchUserStats,
     deleteTaskAsAdmin,
+    searchUsers,
+    clearUserSearch,
     clearError
   }
 })
