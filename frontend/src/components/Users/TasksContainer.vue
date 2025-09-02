@@ -72,9 +72,9 @@
       </div>
     </div>
 
-    <!-- Tasks List -->
+    <!-- Tasks List with Drag & Drop -->
     <div v-else class="space-y-4">
-      <div v-if="tasksStore.filteredTasks.length === 0" class="text-center py-12">
+      <div v-if="displayedTasks.length === 0" class="text-center py-12">
         <svg class="mx-auto h-12 w-12 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -83,23 +83,32 @@
         <p class="mt-1 text-sm text-text-secondary">Get started by creating a new task.</p>
       </div>
 
-      <div v-else class="grid gap-4">
-        <div v-for="task in tasksStore.filteredTasks" :key="task.id"
-          class="bg-bg-card rounded-card p-6 shadow-sm border border-border hover:shadow-md transition-all duration-200">
+      <transition-group name="list" tag="div" class="grid gap-4">
+        <div
+          v-for="(task, index) in displayedTasks"
+          :key="task.id"
+          class="bg-bg-card rounded-card p-6 shadow-sm border border-border hover:shadow-md transition-all duration-200"
+          draggable="true"
+          @dragstart="onDragStart(index)"
+          @dragover.prevent="onDragOver(index)"
+          @drop.prevent="onDrop(index)"
+        >
           <div class="flex items-start justify-between">
             <div class="flex-1 min-w-0">
               <div class="flex items-center space-x-3 mb-2">
                 <h3 class="text-lg font-medium text-text truncate">
                   {{ task.title }}
                 </h3>
-                <span :class="[
-                  'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
-                  task.status === 'completed'
-                    ? 'bg-success text-text-inverse'
-                    : 'bg-warning text-text-inverse'
-                ]">
-                  {{ task.status }}
-                </span>
+                <transition name="fade">
+                  <span :key="task.status" :class="[
+                    'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
+                    task.status === 'completed'
+                      ? 'bg-success text-text-inverse'
+                      : 'bg-warning text-text-inverse'
+                  ]">
+                    {{ task.status }}
+                  </span>
+                </transition>
                 <span :class="[
                   'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
                   priorityClasses[task.priority]
@@ -124,10 +133,11 @@
                 class="inline-flex items-center px-3 py-2 border border-border text-sm leading-4 font-medium rounded-card text-text bg-bg hover:bg-bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-200">
                 Edit
               </button>
+              <span class="cursor-move select-none text-text-muted" aria-label="Drag handle">≡</span>
             </div>
           </div>
         </div>
-      </div>
+      </transition-group>
     </div>
 
     <CreateModal v-if="showCreateModal" :toggle-create-modal="toggleCreateModal" />
@@ -156,6 +166,15 @@ const filters = ref({
   priority: '',
   search: ''
 })
+
+// Drag & Drop state
+const displayedTasks = ref([])
+const dragSourceIndex = ref(null)
+
+// Sync displayed tasks with filtered tasks
+watch(() => tasksStore.filteredTasks, (val) => {
+  displayedTasks.value = [...val]
+}, { immediate: true })
 
 // Computed properties
 const priorityClasses = computed(() => ({
@@ -200,6 +219,31 @@ const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString()
 }
 
+// Drag handlers
+const onDragStart = (index) => {
+  dragSourceIndex.value = index
+}
+
+const onDragOver = (index) => {
+  // Optional: add visual cue later
+}
+
+const onDrop = async (targetIndex) => {
+  if (dragSourceIndex.value === null || dragSourceIndex.value === targetIndex) return
+
+  const list = [...displayedTasks.value]
+  const [moved] = list.splice(dragSourceIndex.value, 1)
+  list.splice(targetIndex, 0, moved)
+  displayedTasks.value = list
+  dragSourceIndex.value = null
+
+  try {
+    await tasksStore.reorderTasks(displayedTasks.value)
+  } catch (error) {
+    console.error('Failed to reorder tasks:', error)
+  }
+}
+
 // Watchers
 watch(filters, () => {
   applyFilters()
@@ -211,3 +255,17 @@ onMounted(async () => {
   await tasksStore.fetchStatistics()
 })
 </script>
+
+<style scoped>
+.list-move {
+  transition: transform 0.2s ease;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.15s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

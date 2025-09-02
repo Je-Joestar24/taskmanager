@@ -4,7 +4,7 @@
         <div class="mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
-                    <router-link to="/" class="flex-shrink-0">
+                    <router-link to="/login" class="flex-shrink-0">
                         <h1 class="text-xl font-bold text-primary">{{ authStore.isAdmin ? 'Admin Panel' : 'Task Manager'
                             }}
                         </h1>
