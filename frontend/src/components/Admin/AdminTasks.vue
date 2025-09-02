@@ -57,7 +57,7 @@
         </div>
 
         <!-- Loading State -->
-        <div v-if="adminStore.isLoading" class="flex justify-center py-8">
+        <div v-if="notifStore.loadingStates.admin" class="flex justify-center py-8">
             <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
         </div>
 
@@ -138,8 +138,10 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useAdminStore } from '@/stores/admin'
+import { useNotifStore } from '@/stores/notif'
 
 const adminStore = useAdminStore()
+const notifStore = useNotifStore()
 
 const filters = ref({
     status: '',

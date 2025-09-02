@@ -6,6 +6,35 @@ A full-stack Task Management system built with:
 - Auth: Laravel Sanctum (SPA tokens)
 - DB: MySQL (primary), SQLite for quick local/dev if desired
 
+## Getting Started
+
+1) Clone the repository
+```
+git clone https://github.com/Je-Joestar24/taskmanager.git
+cd taskmanager
+```
+
+2) Backend setup (Laravel)
+```
+cd backend
+cp .env.example .env
+# Update DB_*, APP_URL, SANCTUM settings as needed
+composer install
+php artisan key:generate
+php artisan migrate --seed
+php artisan serve
+```
+
+3) Frontend setup (Vue 3)
+```
+cd ../frontend
+npm install
+npm run dev
+```
+
+- Backend will run at http://127.0.0.1:8000 by default
+- Frontend (Vite) will run at http://localhost:5173
+
 ## Features
 
 - Authentication (register, login, logout) with Sanctum
