@@ -234,3 +234,11 @@ npm run build
 
 ## License
 MIT
+
+## API Documentation
+
+A complete Postman collection with all endpoints, example requests/responses, and environment guidance is available here:
+
+[Task Manager API – Postman Collection](https://jpar1252003-7459091.postman.co/workspace/Jejomar-Parrilla's-Workspace~7501a240-b47b-4415-8aa3-24dde4a9bf55/collection/48078216-bf158a62-32b9-487a-a340-634686b3ab98?action=share&source=copy-link&creator=48078216)
+
+If the link requires access, export the collection as JSON and place it under `backend/docs/TaskManagerAPI.postman_collection.json`, then reference it locally in this README.
