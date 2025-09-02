@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use App\Models\User;
 use App\Models\Task;
 use Illuminate\Support\Facades\Cache;
+use Mockery\Matcher\Not;
 
 class AdminController extends Controller
 {
@@ -18,7 +19,7 @@ class AdminController extends Controller
     {
         $cacheKey = 'admin_dashboard_stats';
         $stats = Cache::remember($cacheKey, 300, function () {
-            $totalUsers = User::count();
+            $totalUsers = User::where('role', 'user')->count();
             $totalTasks = Task::count();
             $pendingTasks = Task::where('status', 'pending')->count();
             $completedTasks = Task::where('status', 'completed')->count();
@@ -45,16 +46,25 @@ class AdminController extends Controller
     public function users(Request $request): JsonResponse
     {
         $perPage = $request->get('per_page', 15);
+        $search = $request->get('search', '');
         
-        $users = User::withCount(['tasks as total_tasks', 'tasks as pending_tasks' => function ($query) {
-            $query->where('status', 'pending');
-        }, 'tasks as completed_tasks' => function ($query) {
-            $query->where('status', 'completed');
-        }])
-        ->with(['tasks' => function ($query) {
-            $query->latest()->take(5); // Get latest 5 tasks per user
-        }])
-        ->paginate($perPage);
+        $users = User::where('role', '!=', 'admin')
+            ->when($search, function ($query) use ($search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                      ->orWhere('email', 'like', "%{$search}%");
+                });
+            })
+            ->withCount(['tasks as total_tasks', 'tasks as pending_tasks' => function ($query) {
+                $query->where('status', 'pending');
+            }, 'tasks as completed_tasks' => function ($query) {
+                $query->where('status', 'completed');
+            }])
+            ->with(['tasks' => function ($query) {
+                $query->latest()->take(5); // Get latest 5 tasks per user
+            }])
+            ->orderBy('name')
+            ->paginate($perPage);
 
         return response()->json([
             'data' => $users->items(),
