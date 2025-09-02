@@ -1,63 +1,15 @@
 <template>
-  <div>
-    <h2>Login</h2>
-    
-    <form @submit.prevent="handleLogin">
-      <div>
-        <label for="email">Email:</label>
-        <input 
-          id="email"
-          v-model="form.email"
-          type="email"
-          required
-        />
+  <div class="min-h-screen bg-bg flex items-center justify-center p-4">
+    <div class="w-full max-w-6xl bg-bg-card rounded-card shadow-xl border border-border overflow-hidden">
+      <div class="grid lg:grid-cols-2 min-h-[600px]">
+        <LeftPanel />
+        <RightPanel />
       </div>
-      
-      <div>
-        <label for="password">Password:</label>
-        <input 
-          id="password"
-          v-model="form.password"
-          type="password"
-          required
-        />
-      </div>
-      
-      <div v-if="authStore.error">
-        <p>{{ authStore.error }}</p>
-      </div>
-      
-      <button type="submit" :disabled="authStore.isLoading">
-        {{ authStore.isLoading ? 'Logging in...' : 'Login' }}
-      </button>
-    </form>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
-
-const router = useRouter()
-const route = useRoute()
-const authStore = useAuthStore()
-
-const form = ref({
-  email: '',
-  password: ''
-})
-
-const handleLogin = async () => {
-  try {
-    await authStore.login(form.value)
-    
-    // Redirect to intended page or dashboard
-    const redirectPath = route.query.redirect || (authStore.isAdmin ? '/admin' : '/tasks')
-    router.push(redirectPath)
-  } catch (error) {
-    // Error is already handled in the store
-    console.error('Login failed:', error)
-  }
-}
+import LeftPanel from './Login/LeftPanel.vue';
+import RightPanel from './Login/RightPanel.vue';
 </script>
