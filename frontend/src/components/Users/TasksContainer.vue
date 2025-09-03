@@ -90,7 +90,7 @@
           class="bg-bg-card rounded-card p-6 shadow-sm border border-border hover:shadow-md transition-all duration-200"
           draggable="true"
           @dragstart="onDragStart(index)"
-          @dragover.prevent="onDragOver(index)"
+          @dragover.prevent="onDragOver"
           @drop.prevent="onDrop(index)"
         >
           <div class="flex items-start justify-between">
@@ -146,9 +146,11 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
 import { useTasksStore } from '@/stores/tasks'
 import { useNotifStore } from '@/stores/notif'
+import { useAuthStore } from '@/stores/auth'
+import { getEcho, disconnectEcho } from '@/config/echo'
 import CreateModal from './Modal/CreateModal.vue'
 import EditModal from './Modal/EditModal.vue'
 import TaskHeader from './TaskHeader.vue'
@@ -156,6 +158,7 @@ import TaskStatistics from './TaskStatistics.vue'
 
 const tasksStore = useTasksStore()
 const notifStore = useNotifStore()
+const authStore = useAuthStore()
 
 // Local state
 const showCreateModal = ref(false)
@@ -224,7 +227,7 @@ const onDragStart = (index) => {
   dragSourceIndex.value = index
 }
 
-const onDragOver = (index) => {
+const onDragOver = () => {
   // Optional: add visual cue later
 }
 
@@ -253,6 +256,41 @@ watch(filters, () => {
 onMounted(async () => {
   await tasksStore.fetchTasks()
   await tasksStore.fetchStatistics()
+
+  // Setup Echo channel listeners
+  try {
+    const echo = getEcho(authStore.token)
+
+    // Private user tasks channel
+    echo.private(`tasks.user.${authStore.user?.id}`)
+      .listen('TaskCreated', (e) => {
+        // Refetch tasks or push if belongs to current user
+        tasksStore.fetchTasks()
+        tasksStore.fetchStatistics()
+      })
+      .listen('TaskUpdated', (e) => {
+        tasksStore.fetchTasks()
+        tasksStore.fetchStatistics()
+      })
+      .listen('TaskReordered', (e) => {
+        tasksStore.fetchTasks()
+      })
+
+    // Admin channel for global changes (only if admin)
+    if (authStore.isAdmin) {
+      echo.private('admin.tasks')
+        .listen('TaskDeletedByAdmin', (e) => {
+          tasksStore.fetchTasks()
+          tasksStore.fetchStatistics()
+        })
+    }
+  } catch (err) {
+    console.error('Echo setup failed:', err)
+  }
+})
+
+onBeforeUnmount(() => {
+  disconnectEcho()
 })
 </script>
 

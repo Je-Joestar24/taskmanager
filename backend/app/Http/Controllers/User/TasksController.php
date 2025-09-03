@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Task;
 use App\Http\Resources\TaskResource;
 use App\Http\Resources\TaskCollection;
+use App\Events\TaskCreated;
+use App\Events\TaskUpdated;
+use App\Events\TaskReordered;
 
 class TasksController extends Controller
 {
@@ -91,6 +94,9 @@ class TasksController extends Controller
         // Clear cache for this user
         $this->clearUserTasksCache($user->id);
 
+        // Broadcast task created
+        TaskCreated::dispatch($task);
+
         return response()->json([
             'message' => 'Task created successfully.',
             'data' => new TaskResource($task)
@@ -134,6 +140,9 @@ class TasksController extends Controller
         // Clear cache for this user
         $this->clearUserTasksCache($task->user_id);
 
+        // Broadcast task updated
+        TaskUpdated::dispatch($task);
+
         return response()->json([
             'message' => 'Task updated successfully.',
             'data' => new TaskResource($task)
@@ -171,6 +180,9 @@ class TasksController extends Controller
         // Clear cache for this user
         $this->clearUserTasksCache($user->id);
 
+        // Broadcast reorder event
+        TaskReordered::dispatch($user->id);
+
         return response()->json([
             'message' => 'Tasks reordered successfully.'
         ]);
@@ -189,6 +201,9 @@ class TasksController extends Controller
 
         // Clear cache for this user
         $this->clearUserTasksCache($task->user_id);
+
+        // Broadcast task updated
+        TaskUpdated::dispatch($task);
 
         return response()->json([
             'message' => 'Task status updated successfully.',

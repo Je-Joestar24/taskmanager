@@ -1,41 +1,11 @@
-# frontend
+# Frontend notes
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+## Realtime (Laravel Echo + Pusher)
+Create a `.env` in `frontend/` with:
 ```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
+VITE_PUSHER_KEY=your_pusher_key
+VITE_PUSHER_CLUSTER=mt1
+VITE_PUSHER_HOST=localhost
+VITE_PUSHER_PORT=6001
+VITE_PUSHER_TLS=false
 ```
